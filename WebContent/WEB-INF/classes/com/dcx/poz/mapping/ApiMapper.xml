@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dcx.poz.dao.ApiMapper" >
+  <resultMap id="BaseResultMap" type="com.dcx.poz.model.Api" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="lasttime" property="lasttime" jdbcType="INTEGER" />
+    <result column="lastuid" property="lastuid" jdbcType="INTEGER" />
+    <result column="delFlag" property="delFlag" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="ord" property="ord" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="com.dcx.poz.model.Api" extends="BaseResultMap" >
+    <result column="parameters" property="parameters" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="ret" property="ret" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select * from api where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from api where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.dcx.poz.model.Api" >
+    insert into api (id, aid, url, name, description,lasttime,lastuid,delFlag, type, ord,parameters, remark,ret)
+    values (#{id,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
+	      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{lasttime,jdbcType=INTEGER}, 
+	      #{lastuid,jdbcType=INTEGER}, #{delFlag,jdbcType=TINYINT}, #{type,jdbcType=CHAR}, 
+	      #{ord,jdbcType=INTEGER}, #{parameters,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR}, 
+	      #{ret,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dcx.poz.model.Api" >
+    insert into api
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="aid != null" >
+        aid,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="lasttime != null" >
+        lasttime,
+      </if>
+      <if test="lastuid != null" >
+        lastuid,
+      </if>
+      <if test="delFlag != null" >
+        delFlag,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="ord != null" >
+        ord,
+      </if>
+      <if test="parameters != null" >
+        parameters,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="ret != null" >
+        ret,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=INTEGER},
+      </if>
+      <if test="lastuid != null" >
+        #{lastuid,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="ord != null" >
+        #{ord,jdbcType=INTEGER},
+      </if>
+      <if test="parameters != null" >
+        #{parameters,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ret != null" >
+        #{ret,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dcx.poz.model.Api" >
+    update api
+    <set >
+      <if test="aid != null" >
+        aid = #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        lasttime = #{lasttime,jdbcType=INTEGER},
+      </if>
+      <if test="lastuid != null" >
+        lastuid = #{lastuid,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        delFlag = #{delFlag,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="ord != null" >
+        ord = #{ord,jdbcType=INTEGER},
+      </if>
+      <if test="parameters != null" >
+        parameters = #{parameters,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ret != null" >
+        ret = #{ret,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dcx.poz.model.Api" >
+    update api
+   		set 
+	   	  aid = #{aid,jdbcType=INTEGER},
+	      url = #{url,jdbcType=VARCHAR},
+	      name = #{name,jdbcType=VARCHAR},
+	      description = #{description,jdbcType=VARCHAR},
+	      lasttime = #{lasttime,jdbcType=INTEGER},
+	      lastuid = #{lastuid,jdbcType=INTEGER},
+	      delFlag = #{delFlag,jdbcType=TINYINT},
+	      type = #{type,jdbcType=CHAR},
+	      ord = #{ord,jdbcType=INTEGER},
+	      parameters = #{parameters,jdbcType=LONGVARCHAR},
+	      remark = #{remark,jdbcType=LONGVARCHAR},
+	      ret = #{ret,jdbcType=LONGVARCHAR}
+   	where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dcx.poz.model.Api" >
+    update api
+    set aid = #{aid,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      lasttime = #{lasttime,jdbcType=INTEGER},
+      lastuid = #{lastuid,jdbcType=INTEGER},
+      delFlag = #{delFlag,jdbcType=TINYINT},
+      type = #{type,jdbcType=CHAR},
+      ord = #{ord,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <resultMap id="apiListWithCategoryMap" type="apiCategory" >
+    <id column="cid" property="id" jdbcType="INTEGER" />
+    <result column="cname" property="name" jdbcType="VARCHAR" />
+    <collection property="apiList" ofType="api">
+        <id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="name" property="name" jdbcType="VARCHAR" />
+    	<result column="url" property="url" jdbcType="VARCHAR" />
+    	<result column="type" property="type" jdbcType="VARCHAR" />
+    	<result column="description" property="description" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  
+  <select id="getApiListWithCategory" resultMap="apiListWithCategoryMap"> 
+	   SELECT 
+		   	ac.id as cid,
+		   	ac.name as cname,
+		   	a.id,
+		   	a.name,
+		   	a.url,
+		   	a.type,
+		   	a.description
+	   from api_category ac left JOIN api a on ac.id=a.aid
+  </select>
+</mapper>
