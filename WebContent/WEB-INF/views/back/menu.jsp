@@ -16,6 +16,12 @@
                     <li><a href="${ctx }/api/category/list">接口分类</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">相册管理</span></a>
+            	<ul class="nav nav-second-level collapse">
+                    <li><a href="${ctx }/api/list">相册列表</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
