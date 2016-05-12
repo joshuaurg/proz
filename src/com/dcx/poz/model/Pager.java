@@ -5,79 +5,99 @@ import java.util.List;
 
 public class Pager<T> implements Serializable {
 
-	/**
-	 * 一页中数据的条数
-	 */
-	private Integer pageSize;
+	private static final long serialVersionUID = -8741766802354222579L;
 	
-	/**
-	 * 起始数据的索引
-	 */
-	private Integer offset;
+	private int pageSize; // 每页显示多少条记录
 	
-	/**
-	 * 数据
-	 */
-	private List<T> data;
+	private int currentPage; //当前第几页数据
 	
-	/**
-	 * 当前第几页
-	 */
-	private Integer currentPage;
+	private int totalRecord; // 一共多少条记录
 	
-	/**
-	 * 总页数
-	 */
-	private Integer totalPageSize;
+	private int totalPage; // 一共多少页记录
 	
-	public Pager() {
-		super();
+	private List<T> dataList; //要显示的数据
+	
+	public Pager(int pageNum, int pageSize, List<T> sourceList){
+		if(sourceList == null || sourceList.isEmpty()){
+			return;
+		}
+		
+		// 总记录条数
+		this.totalRecord = sourceList.size();
+		
+		// 每页显示多少条记录
+		this.pageSize = pageSize;
+		
+		//获取总页数
+		this.totalPage = this.totalRecord / this.pageSize;
+		if(this.totalRecord % this.pageSize !=0){
+			this.totalPage = this.totalPage + 1;
+		}
+		
+		// 当前第几页数据
+		this.currentPage = this.totalPage < pageNum ?  this.totalPage : pageNum;
+				
+		// 起始索引
+		int fromIndex	= this.pageSize * (this.currentPage -1);
+		
+		// 结束索引
+		int toIndex  = this.pageSize * this.currentPage > this.totalRecord ? this.totalRecord : this.pageSize * this.currentPage;
+				
+		this.dataList = sourceList.subList(fromIndex, toIndex);
+	}
+	
+	public Pager(){
+		
 	}
 
-	public Pager(Integer pageSize, Integer currentPage) {
+	public Pager(int pageSize, int currentPage, int totalRecord, int totalPage,
+			List<T> dataList) {
 		super();
 		this.pageSize = pageSize;
 		this.currentPage = currentPage;
+		this.totalRecord = totalRecord;
+		this.totalPage = totalPage;
+		this.dataList = dataList;
 	}
 
-	public Integer getPageSize() {
+	public int getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(Integer pageSize) {
+	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
 
-	public Integer getOffset() {
-		return offset;
-	}
-
-	public void setOffset(Integer offset) {
-		this.offset = offset;
-	}
-
-	public List<T> getData() {
-		return data;
-	}
-
-	public void setData(List<T> data) {
-		this.data = data;
-	}
-
-	public Integer getCurrentPage() {
+	public int getCurrentPage() {
 		return currentPage;
 	}
 
-	public void setCurrentPage(Integer currentPage) {
+	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
 
-	public Integer getTotalPageSize() {
-		return totalPageSize;
+	public int getTotalRecord() {
+		return totalRecord;
 	}
 
-	public void setTotalPageSize(Integer totalPageSize) {
-		this.totalPageSize = totalPageSize;
+	public void setTotalRecord(int totalRecord) {
+		this.totalRecord = totalRecord;
 	}
-	
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public List<T> getDataList() {
+		return dataList;
+	}
+
+	public void setDataList(List<T> dataList) {
+		this.dataList = dataList;
+	}
+
 }

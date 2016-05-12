@@ -5,5 +5,9 @@
 	<typeAliases>
 		<typeAlias type="com.dcx.poz.model.Api" alias="api"/>
 		<typeAlias type="com.dcx.poz.model.ApiCategory" alias="apiCategory"/>
+		<typeAlias type="com.dcx.poz.model.AlbumGroup" alias="albumGroup"/>
+		<typeAlias type="com.dcx.poz.model.AlbumPhoto" alias="albumPhoto"/>
+		<typeAlias type="com.dcx.poz.model.AlbumSelect" alias="albumSelect"/>
+		<typeAlias type="com.dcx.poz.model.PagerParam" alias="pagerParam"/>
 	</typeAliases>
 </configuration>

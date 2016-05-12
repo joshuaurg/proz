@@ -33,7 +33,7 @@
   z-index: 999999;
   overflow: hidden;
   background: #000;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(226, 226, 226, 0.9);
   opacity: 0;
   display: none;
   direction: ltr;
@@ -135,9 +135,8 @@
   margin: 0 40px 0 0;
   font-size: 20px;
   line-height: 30px;
-  color: #fff;
-  text-shadow: 0 0 2px #000;
-  opacity: 0.8;
+  color: #EF1717;
+  opacity:1;
   display: none;
 }
 .blueimp-gallery > .close {
@@ -165,10 +164,13 @@
 }
 .blueimp-gallery > .prev:hover,
 .blueimp-gallery > .next:hover,
-.blueimp-gallery > .close:hover,
 .blueimp-gallery > .title:hover,
 .blueimp-gallery > .play-pause:hover {
   color: #fff;
+  opacity: 1;
+}
+.blueimp-gallery > .close:hover{
+  color: #EF1717;
   opacity: 1;
 }
 .blueimp-gallery-controls > .prev,

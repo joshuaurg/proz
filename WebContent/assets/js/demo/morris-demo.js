@@ -3,15 +3,15 @@ $(function() {
     Morris.Line({
         element: 'morris-one-line-chart',
             data: [
-                { year: '2008', value: 5 },
-                { year: '2009', value: 10 },
-                { year: '2010', value: 8 },
-                { year: '2011', value: 22 },
-                { year: '2012', value: 8 },
-                { year: '2014', value: 10 },
-                { year: '2015', value: 5 }
+                { day: '2008-10-10', value: 5 },
+                { day: '2009-10-10', value: 10 },
+                { day: '2010-10-10', value: 8 },
+                { day: '2011-10-10', value: 22 },
+                { day: '2012-10-10', value: 8 },
+                { day: '2014-10-10', value: 10 },
+                { day: '2015-10-10', value: 5 }
             ],
-        xkey: 'year',
+        xkey: 'day',
         ykeys: ['value'],
         resize: true,
         lineWidth:4,
