@@ -10,4 +10,9 @@ public class ConstantUtil {
 	 * 默认显示第几页记录
 	 */
 	public static final int DEFAULT_PAGE_NUM = 1;
+	
+	/**
+	 * 七牛图片访问前缀
+	 */
+	public static final String QINIU_IMG_PREFIX = "http://joshuago.qiniudn.com/";
 }

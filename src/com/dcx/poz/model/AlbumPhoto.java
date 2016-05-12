@@ -9,7 +9,7 @@ public class AlbumPhoto {
 
     private String remark;
 
-    private Date takeTime;
+    private String takeTime;
 
     private Integer delFlag;
 
@@ -39,11 +39,11 @@ public class AlbumPhoto {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Date getTakeTime() {
+    public String getTakeTime() {
         return takeTime;
     }
 
-    public void setTakeTime(Date takeTime) {
+    public void setTakeTime(String takeTime) {
         this.takeTime = takeTime;
     }
 

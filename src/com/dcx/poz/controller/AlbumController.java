@@ -1,5 +1,6 @@
 package com.dcx.poz.controller;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -13,17 +14,24 @@ import com.dcx.poz.util.ConstantUtil;
 import com.dcx.poz.util.DateUtil;
 import com.dcx.poz.util.QiniuUtil;
 import com.dcx.poz.util.redis.RedisClientTemplate;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+import com.drew.metadata.exif.ExifIFD0Directory;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 
  
 @Controller
@@ -80,27 +88,48 @@ public class AlbumController {
 		String groupid = request.getParameter("groupid");
 		List<AlbumPhoto> photoList = albumService.getPhotoListByGroupId(Integer.parseInt(groupid));
 		request.setAttribute("photoList", photoList);
+		request.setAttribute("groupid", groupid);
 		return "/back/album/photo/list";
 	}
 
     @RequestMapping(value = "/back/album/photo/upload",method = RequestMethod.POST)
     public String uploadPhoto(MultipartHttpServletRequest request) {
+    	String groupId = request.getParameter("groupId");
         try {
             Iterator<String> itr = request.getFileNames();
             while (itr.hasNext()) {
                 String uploadedFile = itr.next();
                 MultipartFile file = request.getFile(uploadedFile);
                 String mimeType = file.getContentType();
-                String filename = file.getOriginalFilename();
                 byte[] bytes = file.getBytes();
+                
+                Metadata metadata = ImageMetadataReader.readMetadata(file.getInputStream());
+                Directory exif = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+                Collection<Tag> tags =  exif.getTags();
+                Iterator<Tag> iter =  tags.iterator();
+                
+                AlbumPhoto albumPhoto = new AlbumPhoto();
+                //逐个遍历每个Tag
+                while(iter.hasNext()){
+	                 Tag tag = (Tag)iter.next();
+	                 String desc = tag.getDescription(); //标签信息
+	                 if (tag.hasTagName() && (tag.getTagName().equals("Date/Time Original") || tag.getTagName().equals("Date/Time"))) {  
+	                	 albumPhoto.setTakeTime(desc);
+		             }else{
+		            	 albumPhoto.setTakeTime(DateUtil.date2Str(new Date(), DateUtil.DATETIME_PATTERN));
+		             }
+                }
                 try {
                 	//创建上传对象
                 	UploadManager uploadManager = new UploadManager();
                     //调用put方法上传，这里指定的key和上传策略中的key要一致
-                	Response res = uploadManager.put(bytes, "111.jpg", QiniuUtil.getUpToken());
-                    //打印返回的信息
-                    System.out.println(res.bodyString()); 
-                    } catch (QiniuException e) {
+                	Response res = uploadManager.put(bytes, System.currentTimeMillis()+".jpg", QiniuUtil.getUpToken());
+                	JSONObject resJson = new JSONObject(res.bodyString());
+                	albumPhoto.setUrl(ConstantUtil.QINIU_IMG_PREFIX + resJson.getString("key"));
+                	albumPhoto.setDelFlag(0);
+                	albumPhoto.setGroupId(Integer.parseInt(groupId));
+                	albumService.saveAlbumPhoto(albumPhoto);
+                } catch (QiniuException e) {
                         Response r = e.response;
                         // 请求失败时打印的异常的信息
                         System.out.println(r.toString());

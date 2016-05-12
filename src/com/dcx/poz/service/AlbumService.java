@@ -13,6 +13,8 @@ public interface AlbumService {
 	void saveAlbumGroup(AlbumGroup albumGroup);
 
 	List<AlbumPhoto> getPhotoListByGroupId(int parseInt);
+
+	void saveAlbumPhoto(AlbumPhoto albumPhoto);
  
 
 }

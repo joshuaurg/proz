@@ -54,7 +54,9 @@
                     </div>
                     <div class="ibox-content">
                         <div class="lightBoxGallery">
-                            <a href="${ctx }/assets/img/a1.jpg" title="Image from Unsplash" data-gallery=""><img src="${ctx }/assets/img/a1.jpg"></a>
+                        	<c:forEach items="${photoList }" var="photo">
+                        		<a href="${photo.url }" title="Image from Unsplash" data-gallery=""><img src="${photo.url }" width="100" height="100"></a>
+                        	</c:forEach>
                             <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" style="display: none;">
                                 <div class="slides" style="width: 138240px;"></div>
                                 <a class="prev">‹</a>
@@ -71,13 +73,11 @@
             <div class="row">
                 <div class="col-lg-12">
                 <div class="ibox-content">
-                        <form id="my-awesome-dropzone" class="dropzone" action="#">
+                        <form id="my-awesome-dropzone" class="dropzone" method="post" action="${ctx }/album/back/album/photo/upload">
+                        	<input type="hidden" name="groupId" value="${groupid }" />
                             <div class="dropzone-previews"></div>
                             <button type="submit" class="btn btn-primary pull-right">Submit this form!</button>
                         </form>
-                        <div>
-                            <div class="m text-right"><small>DropzoneJS is an open source library that provides drag'n'drop file uploads with image previews: <a href="https://github.com/enyo/dropzone" target="_blank">https://github.com/enyo/dropzone</a></small> </div>
-                        </div>
                     </div>
             	</div>
             </div>

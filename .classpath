@@ -61,6 +61,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-test-3.2.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jedis-2.8.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-pool2-2.4.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/metadata-extractor-2.9.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
