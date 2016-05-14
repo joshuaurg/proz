@@ -20,6 +20,7 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifIFD0Directory;
+import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
@@ -29,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -146,4 +148,20 @@ public class AlbumController {
         }
         return null;
     }
+    
+    @RequestMapping(value = "/front/album/list",method = RequestMethod.GET)
+    @ResponseBody
+    public String getAlbumList(HttpServletRequest request) {
+    	List<AlbumGroup> albumList = albumService.getAllAlbumList();
+    	Gson gson = new Gson();
+    	return gson.toJson(albumList);
+    }
+    @RequestMapping("/front/album/photo/list")
+    @ResponseBody
+	public String getPhotoList(HttpServletRequest request){
+		String groupid = request.getParameter("groupid");
+		List<AlbumPhoto> photoList = albumService.getPhotoListByGroupId(Integer.parseInt(groupid));
+		Gson gson = new Gson();
+    	return gson.toJson(photoList);
+	}
 }

@@ -117,4 +117,8 @@
   <select id="getAlbumGroupCount" parameterType="albumGroup" resultType="java.lang.Integer">
       select count(id) from album_group  
   </select>
+  
+  <select id="getAllAlbumList" resultType="albumGroup">
+      SELECT * FROM album_group where delFlag = 0
+  </select>
 </mapper>

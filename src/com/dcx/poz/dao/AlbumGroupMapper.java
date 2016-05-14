@@ -1,9 +1,7 @@
 package com.dcx.poz.dao;
 
 import java.util.List;
-
 import com.dcx.poz.model.AlbumGroup;
-import com.dcx.poz.model.Pager;
 import com.dcx.poz.model.PagerParam;
 
 public interface AlbumGroupMapper {
@@ -22,4 +20,6 @@ public interface AlbumGroupMapper {
 	List<AlbumGroup> getAlbumGroupPager(PagerParam<AlbumGroup> pagerParam);
 
 	Integer getAlbumGroupCount(AlbumGroup param);
+
+	List<AlbumGroup> getAllAlbumList();
 }

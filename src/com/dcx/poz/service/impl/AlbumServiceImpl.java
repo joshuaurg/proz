@@ -59,6 +59,10 @@ public class AlbumServiceImpl implements AlbumService {
 	public void saveAlbumPhoto(AlbumPhoto albumPhoto) {
 		albumPhotoMapper.insertSelective(albumPhoto);		
 	}
+	@Override
+	public List<AlbumGroup> getAllAlbumList() {
+		return albumGroupMapper.getAllAlbumList();
+	}
 	
 	
 }

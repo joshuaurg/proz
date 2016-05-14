@@ -15,6 +15,8 @@ public interface AlbumService {
 	List<AlbumPhoto> getPhotoListByGroupId(int parseInt);
 
 	void saveAlbumPhoto(AlbumPhoto albumPhoto);
+
+	List<AlbumGroup> getAllAlbumList();
  
 
 }
