@@ -104,7 +104,6 @@ public class AlbumController {
                 MultipartFile file = request.getFile(uploadedFile);
                 String mimeType = file.getContentType();
                 byte[] bytes = file.getBytes();
-                
                 Metadata metadata = ImageMetadataReader.readMetadata(file.getInputStream());
                 Directory exif = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
                 Collection<Tag> tags =  exif.getTags();
@@ -122,12 +121,8 @@ public class AlbumController {
 		             }
                 }
                 try {
-                	//创建上传对象
-                	UploadManager uploadManager = new UploadManager();
-                    //调用put方法上传，这里指定的key和上传策略中的key要一致
-                	Response res = uploadManager.put(bytes, System.currentTimeMillis()+".jpg", QiniuUtil.getUpToken());
-                	JSONObject resJson = new JSONObject(res.bodyString());
-                	albumPhoto.setUrl(ConstantUtil.QINIU_IMG_PREFIX + resJson.getString("key"));
+                	JSONObject resJson = QiniuUtil.qiniuUpload(bytes,".jpg",ConstantUtil.ImagePrefix.ALBUM);
+                	albumPhoto.setUrl(resJson.getString("key"));
                 	albumPhoto.setDelFlag(0);
                 	albumPhoto.setGroupId(Integer.parseInt(groupId));
                 	albumService.saveAlbumPhoto(albumPhoto);
@@ -141,12 +136,12 @@ public class AlbumController {
                         } catch (QiniuException e1) {
                             //ignore
                         }
-                    } 
+                    }
             }
         }catch(Exception e){
         	
         }
-        return null;
+        return "redirect:/album/back/album/photo/list";
     }
     
     @RequestMapping(value = "/front/album/list",method = RequestMethod.GET)
@@ -161,6 +156,11 @@ public class AlbumController {
 	public String getPhotoList(HttpServletRequest request){
 		String groupid = request.getParameter("groupid");
 		List<AlbumPhoto> photoList = albumService.getPhotoListByGroupId(Integer.parseInt(groupid));
+		if(photoList!=null && photoList.size()>0){
+			for(AlbumPhoto albumPhoto : photoList){
+				albumPhoto.setUrl(ConstantUtil.QINIU_IMG_PREFIX + albumPhoto.getUrl());
+			}
+		}
 		Gson gson = new Gson();
     	return gson.toJson(photoList);
 	}

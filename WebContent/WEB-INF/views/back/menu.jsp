@@ -7,19 +7,15 @@
                 <div class="logo-element">BACK</div>
             </li>
             <li>
-                <a href="${ctx }/minds/list"><i class="fa fa-th-large"></i> <span class="nav-label">奇思妙想</span> </a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">接口管理</span></a>
-            	<ul class="nav nav-second-level collapse">
-                    <li><a href="${ctx }/api/list">接口列表</a></li>
-                    <li><a href="${ctx }/api/category/list">接口分类</a></li>
-                </ul>
-            </li>
-            <li>
                 <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">相册管理</span></a>
             	<ul class="nav nav-second-level collapse">
                     <li><a href="${ctx }/album/back/album/group/list">相册列表</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">诗词管理</span></a>
+            	<ul class="nav nav-second-level collapse">
+                    <li><a href="${ctx }/poem/back/view/list">诗词列表</a></li>
                 </ul>
             </li>
         </ul>

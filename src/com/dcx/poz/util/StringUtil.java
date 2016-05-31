@@ -1,12 +1,15 @@
 package com.dcx.poz.util;
 
+import java.util.List;
 import java.util.Random;
+
+import com.dcx.poz.model.Poem;
 
 public class StringUtil {
 
-	private String randChars = "0123456789abcdefghigklmnopqrstuvtxyzABCDEFGHIGKLMNOPQRSTUVWXYZ";
-	private String randCharsWithoutBig = "0123456789abcdefghigklmnopqrstuvtxyz";
-	private Random random = new Random();	
+	private static String randChars = "0123456789abcdefghigklmnopqrstuvtxyzABCDEFGHIGKLMNOPQRSTUVWXYZ";
+	private static String randCharsWithoutBig = "0123456789abcdefghigklmnopqrstuvtxyz";
+	private static Random random = new Random();	
 	
 	/**
 	 * 
@@ -17,12 +20,23 @@ public class StringUtil {
 	 * @param isOnlyNum
 	 * @return
 	 */
-	public String getRandStr(int length, boolean isOnlyNum) {
+	public static String getRandStr(int length, boolean isOnlyNum) {
 		int size = isOnlyNum ? 10 : 62;
 		StringBuffer hash = new StringBuffer(length);
 		for (int i = 0; i < length; i++) {
 			hash.append(randChars.charAt(random.nextInt(size)));
 		}
 		return hash.toString();
+	}
+	
+	public static boolean isEmpty(String str) {
+		return (str!=null && !"".equals(str))?false:true;
+	}
+
+	public static <T> boolean isEmpty(List<T> rows) {
+		if(rows!=null && rows.size()>0){
+			return false;
+		}
+		return true;
 	}
 }

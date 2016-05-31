@@ -154,3 +154,12 @@ function getNowFormatDate() {
             + " " + date.getHours() + seperator2 + date.getMinutes();
     return currentdate;
 }
+
+function popImage(obj){
+    var event = event || window.event;
+    var target = event.target || event.srcElement;
+    var link = target.src ? target.parentNode : targe;
+    var options = {index: link, event: event};
+    var links = obj.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+}

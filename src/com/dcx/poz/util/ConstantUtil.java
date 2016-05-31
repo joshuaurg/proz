@@ -15,4 +15,14 @@ public class ConstantUtil {
 	 * 七牛图片访问前缀
 	 */
 	public static final String QINIU_IMG_PREFIX = "http://joshuago.qiniudn.com/";
+
+	/**
+	 * 
+	 * 图片前缀
+	 */
+	public static class ImagePrefix{
+		public final static String ALBUM = "album";//相册
+		public final static String POEM = "poem"; //诗词
+	}
+	
 }

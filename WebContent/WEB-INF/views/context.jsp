@@ -36,6 +36,7 @@
 <script type="text/javascript" src="${ctx}/assets/js/plugins/dropzone/dropzone.js"></script>
 <script type="text/javascript" charset="utf-8" src="${ctx }/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="${ctx }/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="${ctx}/assets/js/common.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${ctx }/ueditor/themes/default/css/ueditor.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/bootstrap.min.css">
