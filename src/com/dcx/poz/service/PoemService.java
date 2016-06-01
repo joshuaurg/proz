@@ -15,12 +15,10 @@ public interface PoemService {
 
 	void delPoem(String id);
 
-	Poem getPoemById(int parseInt);
+	Poem getPoemById(int id);
 
 	void updatePoem(Poem poem);
 
 	List<Poem> getPoemPage(Pager<Integer> pager);
-
- 
 
 }

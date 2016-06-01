@@ -23,6 +23,7 @@ public class ConstantUtil {
 	public static class ImagePrefix{
 		public final static String ALBUM = "album";//相册
 		public final static String POEM = "poem"; //诗词
+		public final static String LORD_SONG = "lordsong"; //诗词
 	}
 	
 }

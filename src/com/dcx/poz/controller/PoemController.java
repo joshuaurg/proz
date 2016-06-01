@@ -163,7 +163,7 @@ public class PoemController extends BaseController {
     @RequestMapping(value = "/front/list",method = RequestMethod.GET)
     @ResponseBody
     public String getPoemPage(HttpServletRequest request) {
-    	String offset=request.getParameter("offset");
+      	String offset=request.getParameter("offset");
 		String size=request.getParameter("pageSize");
 		
 		Pager<Integer> pager = new Pager<Integer>();
@@ -171,6 +171,16 @@ public class PoemController extends BaseController {
 		pager.setSize(Integer.parseInt(size));
     	List<Poem> list = poemService.getPoemPage(pager);
     	return JsonUtil.object2String(list);
+    }
+    
+    @RequestMapping(value = "/front/view/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public String getPoem(HttpServletRequest request,@PathVariable("id") String id) {
+    	Poem poem = poemService.getPoemById(Integer.parseInt(id));
+    	if(poem!=null){
+    		poem.setProfileImg(ConstantUtil.QINIU_IMG_PREFIX+poem.getProfileImg());
+    	}
+    	return JsonUtil.object2String(poem);
     }
     
 }

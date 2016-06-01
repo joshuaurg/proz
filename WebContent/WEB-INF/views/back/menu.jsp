@@ -18,6 +18,12 @@
                     <li><a href="${ctx }/poem/back/view/list">诗词列表</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">诗歌管理</span></a>
+            	<ul class="nav nav-second-level collapse">
+                    <li><a href="${ctx }/belief/lordsong/back/list">诗歌列表</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
