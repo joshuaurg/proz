@@ -13,7 +13,7 @@ public class LordSong {
 
     private String songPicUrl;
 
-    private Date creTime;
+    private String creTime;
 
     private Integer playTime;
 
@@ -59,11 +59,11 @@ public class LordSong {
         this.songPicUrl = songPicUrl == null ? null : songPicUrl.trim();
     }
 
-    public Date getCreTime() {
+    public String getCreTime() {
         return creTime;
     }
 
-    public void setCreTime(Date creTime) {
+    public void setCreTime(String creTime) {
         this.creTime = creTime;
     }
 

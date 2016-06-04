@@ -2,7 +2,7 @@ package com.dcx.poz.controller;
 
 import java.util.Date;
 import java.util.List;
-
+import java.util.SortedSet;
 import javax.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,13 @@ import com.dcx.poz.model.LordSong;
 import com.dcx.poz.model.Poem;
 import com.dcx.poz.service.BeliefService;
 import com.dcx.poz.util.ConstantUtil;
+import com.dcx.poz.util.DateUtil;
 import com.dcx.poz.util.JsonUtil;
 import com.dcx.poz.util.MediaUtil;
 import com.dcx.poz.util.PageEntity;
 import com.dcx.poz.util.PageResult;
 import com.dcx.poz.util.QiniuUtil;
+import com.dcx.poz.util.StringUtil;
 import com.dcx.poz.util.redis.RedisClientTemplate;
 import com.google.gson.Gson;
 
@@ -92,12 +94,12 @@ public class BeliefController extends BaseController{
     	lordsong.setTitle(title);
     	lordsong.setAuthor(author);
     	lordsong.setDelFlag(0);
-    	lordsong.setCreTime(new Date());
+    	lordsong.setCreTime(DateUtil.date2Str(new Date(), DateUtil.DATETIME_PATTERN));
     	lordsong.setSongPicUrl(songPicUrl);
     	lordsong.setSongUrl(songUrl);
     	lordsong.setPlayTime(playTime);
     	beliefService.saveLordSong(lordsong);
-    	return "redirect:/poem/back/view/list";
+    	return "redirect:/belief/lordsong/back/list";
     }
 	@RequestMapping(value = "/lordsong/back/add/view",method = RequestMethod.GET)
     public String addLordSongView(HttpServletRequest request) throws Exception {
@@ -109,6 +111,17 @@ public class BeliefController extends BaseController{
 	@ResponseBody
     public String getLordSongPage(HttpServletRequest request) throws Exception {
 		List<LordSong> list = beliefService.getLordSongPage();
+		if(!StringUtil.isEmpty(list)){
+			for(LordSong lordSong : list){
+				if(!StringUtil.isEmpty(lordSong.getSongPicUrl())){
+					lordSong.setSongPicUrl(ConstantUtil.QINIU_IMG_PREFIX + lordSong.getSongPicUrl());
+				}
+				if(!StringUtil.isEmpty(lordSong.getSongUrl())){
+					lordSong.setSongUrl(ConstantUtil.QINIU_AUDIO_PREFIX + lordSong.getSongUrl());
+				}
+				lordSong.setCreTime(DateUtil.date2Str(lordSong.getCreTime(), DateUtil.DATETIME_PATTERN));
+			}
+		}
     	return JsonUtil.object2String(list);
     }
 	

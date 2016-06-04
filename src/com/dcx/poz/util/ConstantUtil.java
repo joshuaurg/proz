@@ -17,6 +17,11 @@ public class ConstantUtil {
 	public static final String QINIU_IMG_PREFIX = "http://joshuago.qiniudn.com/";
 
 	/**
+	 * 七牛音频访问前缀
+	 */
+	public static final String QINIU_AUDIO_PREFIX = "http://o82k6u3pp.bkt.clouddn.com/";
+	
+	/**
 	 * 
 	 * 图片前缀
 	 */

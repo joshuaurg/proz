@@ -55,5 +55,15 @@ public class DateUtil {
 		return sdf.format(date);
 	}
 	
+	/**
+	 * 将字符串格式的日期格式化
+	 * @param date
+	 * @param datePattern
+	 * @return
+	 */
+	public static String date2Str(String dateStr,String datePattern) {
+		SimpleDateFormat sdf = new SimpleDateFormat(datePattern);
+		return sdf.format(parse(dateStr, datePattern));
+	}
 	
 }
