@@ -121,7 +121,7 @@ public class AlbumController {
 		             }
                 }
                 try {
-                	JSONObject resJson = QiniuUtil.qiniuUpload(bytes,".jpg",ConstantUtil.ImagePrefix.ALBUM);
+                	JSONObject resJson = QiniuUtil.qiniuUpload(bytes,".jpg",ConstantUtil.MediaPrefix.ALBUM);
                 	albumPhoto.setUrl(resJson.getString("key"));
                 	albumPhoto.setDelFlag(0);
                 	albumPhoto.setGroupId(Integer.parseInt(groupId));
@@ -147,7 +147,7 @@ public class AlbumController {
     @RequestMapping(value = "/front/album/list",method = RequestMethod.GET)
     @ResponseBody
     public String getAlbumList(HttpServletRequest request) {
-    	List<AlbumGroup> albumList = albumService.getAllAlbumList();
+    	List<AlbumGroup> albumList = null ;//albumService.getAllAlbumList();
     	Gson gson = new Gson();
     	return gson.toJson(albumList);
     }

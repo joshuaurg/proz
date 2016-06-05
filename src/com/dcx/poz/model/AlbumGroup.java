@@ -1,6 +1,5 @@
 package com.dcx.poz.model;
 
-import java.util.Date;
 
 public class AlbumGroup {
     private Integer id;
@@ -14,6 +13,8 @@ public class AlbumGroup {
     private String creTime;
 
     private Integer delFlag;
+    
+    private Integer type;
 
     public Integer getId() {
         return id;
@@ -62,4 +63,13 @@ public class AlbumGroup {
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
     }
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+    
 }

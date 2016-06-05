@@ -51,6 +51,9 @@
       <if test="delFlag != null" >
         delFlag,
       </if>
+      <if test="type != null" >
+        type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -70,6 +73,9 @@
       </if>
       <if test="delFlag != null" >
         #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -114,11 +120,32 @@
       	name
        from album_group limit #{offset},#{pageSize}
   </select>
-  <select id="getAlbumGroupCount" parameterType="albumGroup" resultType="java.lang.Integer">
+  <!-- <select id="getAlbumGroupCount" parameterType="albumGroup" resultType="java.lang.Integer">
       select count(id) from album_group  
-  </select>
+  </select> -->
   
   <select id="getAllAlbumList" resultType="albumGroup">
       SELECT * FROM album_group where delFlag = 0
   </select>
+  
+  <select id="getAlbumGroupList" parameterType="pageEntity" resultType="albumGroup">
+  	select * from album_group 
+  	<where>
+  		<if test="params.type != null">
+        	type = #{params.type}
+    	</if>
+  	</where>
+  	<if test="rows != null">
+        limit #{offset},#{rows}
+    </if>
+  </select>
+   <select id="getAlbumGroupCount" parameterType="pageEntity" resultType="java.lang.Integer">
+  	select count(*) from album_group 
+  	<where>
+  		<if test="params.type != null">
+        	type = #{params.type}
+    	</if>
+  	</where>
+  </select>
+  
 </mapper>

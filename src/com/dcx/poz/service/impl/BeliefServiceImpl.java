@@ -1,16 +1,9 @@
 package com.dcx.poz.service.impl;
 
 import com.dcx.poz.dao.AlbumGroupMapper;
-import com.dcx.poz.dao.AlbumPhotoMapper;
-import com.dcx.poz.dao.AlbumSelectMapper;
 import com.dcx.poz.dao.LordSongMapper;
 import com.dcx.poz.model.AlbumGroup;
-import com.dcx.poz.model.AlbumPhoto;
 import com.dcx.poz.model.LordSong;
-import com.dcx.poz.model.Pager;
-import com.dcx.poz.model.PagerParam;
-import com.dcx.poz.model.Poem;
-import com.dcx.poz.service.AlbumService;
 import com.dcx.poz.service.BeliefService;
 import com.dcx.poz.util.ConstantUtil;
 import com.dcx.poz.util.PageEntity;
@@ -36,6 +29,9 @@ public class BeliefServiceImpl implements BeliefService {
 	@Autowired
 	LordSongMapper lordSongMapper;
 	
+	@Autowired
+	AlbumGroupMapper albumGroupMapper;
+	
 	@Override
 	public void saveLordSong(LordSong lordsong) {
 		lordSongMapper.insertSelective(lordsong);
@@ -59,5 +55,22 @@ public class BeliefServiceImpl implements BeliefService {
 		return lordSongMapper.getLordSongPage();
 	}
 
+	@Override
+	public PageResult<AlbumGroup> getLordSongAlbumList(PageEntity<AlbumGroup> pageEntity) {
+		PageResult<AlbumGroup> pageResult=new PageResult<AlbumGroup>();
+		List<AlbumGroup> rows = albumGroupMapper.getAlbumGroupList(pageEntity);
+		if(!StringUtil.isEmpty(rows)){
+			for(AlbumGroup albumGroup : rows){
+				albumGroup.setProfile(ConstantUtil.QINIU_IMG_PREFIX + albumGroup.getProfile());
+			}
+		}
+		pageResult.setRows(rows);
+		pageResult.setRecords(albumGroupMapper.getAlbumGroupCount(pageEntity));
+		pageResult.setPage(pageEntity.getPage());
+		pageResult.setTotal(PageUtil.calcPagNum(pageResult.getRecords(), pageEntity.getRows()));
+		return pageResult;
+	}
+
+	
 
 }

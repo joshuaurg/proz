@@ -21,7 +21,8 @@
             <li>
                 <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">诗歌管理</span></a>
             	<ul class="nav nav-second-level collapse">
-                    <li><a href="${ctx }/belief/lordsong/back/list">诗歌列表</a></li>
+            		<li><a href="${ctx }/belief/lordsong/back/album/list/view">专辑管理</a></li>
+                    <li><a href="${ctx }/belief/lordsong/back/list">诗歌管理</a></li>
                 </ul>
             </li>
         </ul>
