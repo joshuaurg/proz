@@ -148,4 +148,15 @@
   	</where>
   </select>
   
+  <select id="getAlbumGroups" parameterType="albumGroup" resultType="albumGroup">
+  	select * from album_group 
+  	<where>
+  		delFlag = 0 
+  		<if test="type != null">
+        	and type = #{type}
+    	</if>
+  	</where>
+  </select>
+  
+  
 </mapper>

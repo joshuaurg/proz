@@ -59,6 +59,9 @@
       <if test="delFlag != null" >
         delFlag,
       </if>
+      <if test="albumId != null" >
+        albumId,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -84,6 +87,9 @@
       </if>
       <if test="delFlag != null" >
         #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="albumId != null" >
+        #{albumId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

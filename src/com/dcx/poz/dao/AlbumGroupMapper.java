@@ -25,4 +25,6 @@ public interface AlbumGroupMapper {
 	List<AlbumGroup> getAlbumGroupList(PageEntity<AlbumGroup> pageEntity);
 
 	Integer getAlbumGroupCount(PageEntity<AlbumGroup> pageEntity);
+
+	List<AlbumGroup> getAlbumGroups(AlbumGroup albumGroup);
 }

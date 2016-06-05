@@ -18,6 +18,8 @@ public class LordSong {
     private Integer playTime;
 
     private Integer delFlag;
+    
+    private Integer albumId;
 
     public Integer getId() {
         return id;
@@ -82,4 +84,14 @@ public class LordSong {
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
     }
+
+	public Integer getAlbumId() {
+		return albumId;
+	}
+
+	public void setAlbumId(Integer albumId) {
+		this.albumId = albumId;
+	}
+    
+    
 }

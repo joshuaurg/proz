@@ -61,7 +61,7 @@ public class BeliefController extends BaseController{
 		String rows = request.getParameter("rows");
 		
 		AlbumGroup albumGroup = new AlbumGroup();
-		albumGroup.setType(1);
+		albumGroup.setType(2);
 		PageEntity<AlbumGroup> pageEntity = new PageEntity<AlbumGroup>();
 		pageEntity.setRows(Integer.parseInt(rows));
 		pageEntity.setPage(Integer.parseInt(page));
@@ -110,7 +110,7 @@ public class BeliefController extends BaseController{
 			if(!StringUtil.isEmpty(path)){
 				albumGroup.setProfile(path);
 			}
-			albumGroup.setType(1);
+			albumGroup.setType(2);
 			albumServie.saveAlbumGroup(albumGroup);
 		}
     	return "redirect:/belief/lordsong/back/album/list/view";
@@ -144,9 +144,11 @@ public class BeliefController extends BaseController{
     public String addLordSong(HttpServletRequest request) throws Exception {
     	String title = request.getParameter("title"); 
     	String author = request.getParameter("author");
+    	String albumId = request.getParameter("albumId");
     	 
     	Integer playTime = null;
     	LordSong lordsong = new LordSong();
+    	lordsong.setAlbumId(Integer.parseInt(albumId));
     	lordsong.setTitle(title);
     	lordsong.setAuthor(author);
     	lordsong.setDelFlag(0);
@@ -165,7 +167,10 @@ public class BeliefController extends BaseController{
     }
 	@RequestMapping(value = "/lordsong/back/add/view",method = RequestMethod.GET)
     public String addLordSongView(HttpServletRequest request) throws Exception {
-  
+		AlbumGroup albumGroup = new AlbumGroup();
+		albumGroup.setType(2);
+		List<AlbumGroup> albums = albumServie.getAllLordSongAlbumGroup(albumGroup);
+		request.setAttribute("albums", albums);
     	return "/back/lordsong/addLordSong";
     }
 	

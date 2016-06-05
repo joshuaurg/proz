@@ -14,6 +14,16 @@
                 <div class="col-lg-12">
                 	<form class="form-horizontal" action="${ctx}/belief/lordsong/back/add" method="post" id="addPoem" enctype="multipart/form-data">
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">专辑: </label>
+                        <div class="col-sm-3">
+                        	<select name="albumId">
+	                        	<c:forEach items="${albums }" var="album">
+		                        	<option value="${album.id }">${album.name }</option>
+		                        </c:forEach>
+                        	</select>
+	                   	</div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">作者: </label>
                         <div class="col-sm-3">
 	                        <input class="form-control" type="text" id="author" name="author">

@@ -63,6 +63,10 @@ public class AlbumServiceImpl implements AlbumService {
 	public void updateAlbumGroup(AlbumGroup albumGroup) {
 		albumGroupMapper.updateByPrimaryKeySelective(albumGroup);
 	}
+	@Override
+	public List<AlbumGroup> getAllLordSongAlbumGroup(AlbumGroup albumGroup) {
+		return albumGroupMapper.getAlbumGroups(albumGroup);
+	}
 	
 	
 }
