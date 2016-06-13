@@ -16,7 +16,8 @@ public interface AlbumService {
 
 	void saveAlbumPhoto(AlbumPhoto albumPhoto);
 
-	List<AlbumGroup> getAllAlbumList();
- 
+	void updateAlbumGroup(AlbumGroup albumGroup);
 
+	List<AlbumGroup> getAllLordSongAlbumGroup(AlbumGroup albumGroup);
+ 
 }

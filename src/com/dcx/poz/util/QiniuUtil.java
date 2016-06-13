@@ -13,8 +13,8 @@ public class QiniuUtil {
 	private static Auth auth = Auth.create(ResourceLoader.paramsConfig.getProperty("qiniu_ak"), ResourceLoader.paramsConfig.getProperty("qiniu_sk"));
 	
 	//简单上传，使用默认策略，只需要设置上传的空间名就可以了
-	public static String getUpToken(){
-		return auth.uploadToken(ResourceLoader.paramsConfig.getProperty("qiniu_bucketname"));
+	public static String getUpToken(String bucketName){
+		return auth.uploadToken(bucketName);
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public class QiniuUtil {
 		//创建上传对象
 		UploadManager uploadManager = new UploadManager();
 		//调用put方法上传，这里指定的key和上传策略中的key要一致
-		Response res = uploadManager.put(bytes, prefix+"-"+System.currentTimeMillis() + mediaType, QiniuUtil.getUpToken());
+		Response res = uploadManager.put(bytes, prefix+"-"+System.currentTimeMillis() + mediaType, QiniuUtil.getUpToken(ResourceLoader.paramsConfig.getProperty("qiniu_bucketname-pic")));
 		JSONObject resJson = new JSONObject(res.bodyString());
 		return resJson;
 	}
@@ -46,15 +46,31 @@ public class QiniuUtil {
     		  new StringMap().putNotEmpty("persistentOps", pfops).putNotEmpty("persistentPipeline", pipeline), true);
     }
 	  
-	public static JSONObject qiniuUploadWithOps(byte[] bytes,String mediaType,String prefix) throws QiniuException {
+	public static JSONObject qiniuUploadWithOps(byte[] bytes,String extension,Integer mediaType,String prefix) throws QiniuException {
 		Response res =  null;
+		String bucketName = ResourceLoader.paramsConfig.getProperty("qiniu_bucketname-other");
+		//创建上传对象
+		UploadManager uploadManager = new UploadManager();
+		String fileName = prefix+"-"+System.currentTimeMillis() + extension;
 		try {
-			//创建上传对象
-			UploadManager uploadManager = new UploadManager();
-	        //调用put方法上传
-	        res = uploadManager.put(bytes,null,getUpTokenWithOps(ResourceLoader.paramsConfig.getProperty("qiniu_bucketname-audio"),null));
-	        //打印返回的信息
-	        System.out.println(res.bodyString()); 
+			switch (mediaType) {
+				case 1:
+					bucketName = ResourceLoader.paramsConfig.getProperty("qiniu_bucketname-pic");
+					res = uploadManager.put(bytes, fileName, getUpToken(bucketName));
+					break;
+				case 2:
+					bucketName = ResourceLoader.paramsConfig.getProperty("qiniu_bucketname-audio");
+					//调用put方法上传
+			        res = uploadManager.put(bytes,fileName,getUpTokenWithOps(bucketName,fileName));
+					break;	
+				case 3:
+					bucketName = ResourceLoader.paramsConfig.getProperty("qiniu_bucketname-video");
+					//调用put方法上传
+			        res = uploadManager.put(bytes,fileName,getUpTokenWithOps(bucketName,fileName));
+					break;
+				default:
+					break;
+			}
 	    } catch (QiniuException e) {
 	          Response r = e.response;
 	          // 请求失败时打印的异常的信息

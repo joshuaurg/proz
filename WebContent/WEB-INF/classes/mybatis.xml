@@ -12,5 +12,6 @@
 		<typeAlias type="com.dcx.poz.model.Poem" alias="poem"/>
 		<typeAlias type="com.dcx.poz.util.PageEntity" alias="pageEntity"/>
 		<typeAlias type="com.dcx.poz.util.Pager" alias="pager"/>
+		
 	</typeAliases>
 </configuration>

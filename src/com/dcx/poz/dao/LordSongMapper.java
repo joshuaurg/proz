@@ -2,6 +2,7 @@ package com.dcx.poz.dao;
 
 import java.util.List;
 
+import com.dcx.poz.model.AlbumGroup;
 import com.dcx.poz.model.LordSong;
 import com.dcx.poz.util.PageEntity;
 
@@ -23,4 +24,8 @@ public interface LordSongMapper {
 	Integer getLordSongCount(PageEntity<LordSong> pageEntity);
 
 	List<LordSong> getLordSongPage();
+
+	List<AlbumGroup> getLordSongAlbumList(PageEntity<AlbumGroup> pageEntity);
+
+	Integer getLordSongAlbumCount(PageEntity<AlbumGroup> pageEntity);
 }

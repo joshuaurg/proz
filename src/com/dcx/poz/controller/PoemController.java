@@ -90,7 +90,7 @@ public class PoemController extends BaseController {
 				image = null;
 			}else{
 				byte[] bytes = image.getBytes();
-				JSONObject resJson =  QiniuUtil.qiniuUpload(bytes,".jpg",ConstantUtil.ImagePrefix.ALBUM);
+				JSONObject resJson =  QiniuUtil.qiniuUpload(bytes,".jpg",ConstantUtil.MediaPrefix.ALBUM);
 				profileImg = resJson.getString("key");
 			}
 		}
@@ -132,7 +132,7 @@ public class PoemController extends BaseController {
 				image = null;
 			}else{
 				byte[] bytes = image.getBytes();
-				JSONObject resJson =  QiniuUtil.qiniuUpload(bytes,".jpg",ConstantUtil.ImagePrefix.POEM);
+				JSONObject resJson =  QiniuUtil.qiniuUpload(bytes,".jpg",ConstantUtil.MediaPrefix.POEM);
 				profileImg = resJson.getString("key");
 			}
 		}

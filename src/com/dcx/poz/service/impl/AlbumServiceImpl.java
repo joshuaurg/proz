@@ -60,8 +60,12 @@ public class AlbumServiceImpl implements AlbumService {
 		albumPhotoMapper.insertSelective(albumPhoto);		
 	}
 	@Override
-	public List<AlbumGroup> getAllAlbumList() {
-		return albumGroupMapper.getAllAlbumList();
+	public void updateAlbumGroup(AlbumGroup albumGroup) {
+		albumGroupMapper.updateByPrimaryKeySelective(albumGroup);
+	}
+	@Override
+	public List<AlbumGroup> getAllLordSongAlbumGroup(AlbumGroup albumGroup) {
+		return albumGroupMapper.getAlbumGroups(albumGroup);
 	}
 	
 	
