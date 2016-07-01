@@ -28,4 +28,6 @@ public interface LordSongMapper {
 	List<AlbumGroup> getLordSongAlbumList(PageEntity<AlbumGroup> pageEntity);
 
 	Integer getLordSongAlbumCount(PageEntity<AlbumGroup> pageEntity);
+
+	List<LordSong> getLordSongListByAlbumId(int albumGroupId);
 }

@@ -71,6 +71,11 @@ public class BeliefServiceImpl implements BeliefService {
 		return pageResult;
 	}
 
+	@Override
+	public List<LordSong> getLordSongListByAlbumId(int albumGroupId) {
+		return lordSongMapper.getLordSongListByAlbumId(albumGroupId);
+	}
+
 	
 
 }

@@ -1,7 +1,8 @@
 package com.dcx.poz.model;
 
-import java.util.Date;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class AlbumPhoto {
     private Integer id;
 

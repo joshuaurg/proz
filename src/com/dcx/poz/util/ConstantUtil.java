@@ -25,7 +25,6 @@ public class ConstantUtil {
 	 * 七牛视频访问前缀
 	 */
 	public static final String QINIU_VIDEO_PREFIX = "http://o82kaupli.bkt.clouddn.com/";
-	
 
 	/**
 	 * 
@@ -41,6 +40,16 @@ public class ConstantUtil {
 		public final static String MP3 = ".mp3";
 		public final static String MP4 = ".mp4";
 		public final static String JPG = ".jpg";
+	}
+	
+	/**
+	 * 专辑类型
+	 * @author dcx
+	 *
+	 */
+	public static class AlbumType{
+		public final static Integer PHOTO = 1;//相册
+		public final static Integer LORDSONG = 2; //诗词
 	}
 	
 }

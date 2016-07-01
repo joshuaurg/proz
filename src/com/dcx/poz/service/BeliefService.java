@@ -16,6 +16,8 @@ public interface BeliefService {
 
 	PageResult<AlbumGroup> getLordSongAlbumList(PageEntity<AlbumGroup> pageEntity);
 
+	List<LordSong> getLordSongListByAlbumId(int parseInt);
+
 	 
  
 

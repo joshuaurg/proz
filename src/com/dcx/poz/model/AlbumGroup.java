@@ -1,6 +1,8 @@
 package com.dcx.poz.model;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class AlbumGroup {
     private Integer id;
 
@@ -13,7 +15,9 @@ public class AlbumGroup {
     private String creTime;
 
     private Integer delFlag;
-    
+    /**
+     * 1:相册  2:专辑（诗歌）
+     */
     private Integer type;
 
     public Integer getId() {

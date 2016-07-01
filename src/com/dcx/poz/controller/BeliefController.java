@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -192,4 +193,30 @@ public class BeliefController extends BaseController{
     	return JsonUtil.object2String(list);
     }
 	
+	@RequestMapping(value = "/front/lordsong/album/list",method = RequestMethod.GET)
+	@ResponseBody
+    public String getLordSongAlbumPage(HttpServletRequest request) throws Exception {
+		AlbumGroup albumGroup = new AlbumGroup();
+		albumGroup.setType(ConstantUtil.AlbumType.LORDSONG);
+		List<AlbumGroup> list = albumServie.getAllLordSongAlbumGroup(albumGroup);
+		if(!StringUtil.isEmpty(list)){
+			for(AlbumGroup group : list){
+				group.setProfile(ConstantUtil.QINIU_IMG_PREFIX + group.getProfile());
+			}
+		}
+    	return JsonUtil.object2String(list);
+    }
+	
+	@RequestMapping(value = "/front/lordsong/album/{albumGroupId}",method = RequestMethod.GET)
+	@ResponseBody
+    public String getLordSongListByAlbumId(HttpServletRequest request,@PathVariable("albumGroupId") String albumGroupId) throws Exception {
+		List<LordSong> lordSongList = beliefService.getLordSongListByAlbumId(Integer.parseInt(albumGroupId));
+		if(!StringUtil.isEmpty(lordSongList)){
+			for(LordSong lordSong : lordSongList){
+				lordSong.setSongUrl(ConstantUtil.QINIU_AUDIO_PREFIX + lordSong.getSongUrl());
+				lordSong.setSongPicUrl(ConstantUtil.QINIU_IMG_PREFIX + lordSong.getSongPicUrl());
+			}
+		}
+    	return JsonUtil.object2String(lordSongList);
+    }
 }
