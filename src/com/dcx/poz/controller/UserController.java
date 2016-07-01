@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/u",produces = {"application/json;charset=UTF-8"})
 public class UserController {
 
+	
+	public void test(){
+		
+	}
 }
 
 
