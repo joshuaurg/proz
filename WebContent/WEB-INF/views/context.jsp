@@ -51,3 +51,4 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/plugins/sweetalert/sweetalert.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/plugins/blueimp/css/blueimp-gallery.min.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/assets/css/plugins/dropzone/dropzone.css">

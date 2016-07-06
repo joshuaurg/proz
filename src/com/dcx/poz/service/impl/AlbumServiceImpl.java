@@ -8,6 +8,12 @@ import com.dcx.poz.model.AlbumPhoto;
 import com.dcx.poz.model.Pager;
 import com.dcx.poz.model.PagerParam;
 import com.dcx.poz.service.AlbumService;
+import com.dcx.poz.util.ConstantUtil;
+import com.dcx.poz.util.PageEntity;
+import com.dcx.poz.util.PageResult;
+import com.dcx.poz.util.PageUtil;
+import com.dcx.poz.util.StringUtil;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,23 +37,6 @@ public class AlbumServiceImpl implements AlbumService {
 	AlbumSelectMapper albumSelectMapper;
 	
 	@Override
-	public Pager<AlbumGroup> getAlbumGroupPager(AlbumGroup param, int pageNum, int pageSize) {
-		PagerParam<AlbumGroup> pagerParam = new PagerParam<AlbumGroup>();
-		pagerParam.setSearchModel(param);
-		pagerParam.setOffset(pageSize * (pageNum -1));
-		pagerParam.setPageSize(pageSize);
-		List<AlbumGroup> data = albumGroupMapper.getAlbumGroupPager(pagerParam);
-		Integer totalRecord = albumGroupMapper.getAlbumGroupCount(param);
-		//获取总页数
-		int totalPage = totalRecord / pageSize;
-		if(totalRecord % pageSize !=0){
-			totalPage++;
-		}
-		// 组装pager对象
-		Pager<AlbumGroup> result = new Pager<AlbumGroup>(pageSize, pageNum,totalRecord, totalPage, data);
-		return result;
-	}
-	@Override
 	public void saveAlbumGroup(AlbumGroup albumGroup) {
 		albumGroupMapper.insertSelective(albumGroup);		
 	}
@@ -65,6 +54,25 @@ public class AlbumServiceImpl implements AlbumService {
 	}
 	@Override
 	public List<AlbumGroup> getAllLordSongAlbumGroup(AlbumGroup albumGroup) {
+		return albumGroupMapper.getAlbumGroups(albumGroup);
+	}
+	@Override
+	public PageResult<AlbumGroup> getAlbumGroupList(PageEntity<AlbumGroup> pageEntity) {
+		PageResult<AlbumGroup> pageResult=new PageResult<AlbumGroup>();
+		List<AlbumGroup> rows = albumGroupMapper.getAlbumGroupList(pageEntity);
+		if(!StringUtil.isEmpty(rows)){
+			for(AlbumGroup albumGroup : rows){
+				albumGroup.setProfile(ConstantUtil.QINIU_IMG_PREFIX + albumGroup.getProfile());
+			}
+		}
+		pageResult.setRows(rows);
+		pageResult.setRecords(albumGroupMapper.getAlbumGroupCount(pageEntity));
+		pageResult.setPage(pageEntity.getPage());
+		pageResult.setTotal(PageUtil.calcPagNum(pageResult.getRecords(), pageEntity.getRows()));
+		return pageResult;
+	}
+	@Override
+	public List<AlbumGroup> getAlbumGroups(AlbumGroup albumGroup) {
 		return albumGroupMapper.getAlbumGroups(albumGroup);
 	}
 	

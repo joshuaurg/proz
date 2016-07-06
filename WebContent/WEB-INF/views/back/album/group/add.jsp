@@ -29,25 +29,27 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
-                <div class="col-lg-6">
-                	<div class="ibox float-e-margins">
-	                    <div class="ibox-content">
-	                        <div class="row">
-	                            <div class="col-lg-6">
-	                                <form role="form" action="${ctx }/album/back/album/group/save" method="post">
-	                                    <div class="form-group">
-	                                    <input type="text" name="name" placeholder="请输入相册名称" class="form-control">
-	                                    </div>
-	                                    <div>
-	                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
-	                                        <strong>确定</strong></button>
-	                                    </div>
-	                                </form>
-	                            </div>
-	                        </div>
-	                    </div>
-                	</div>
-                </div>
+                <div class="col-lg-8">
+                       <form role="form" action="${ctx }/album/back/album/group/save" method="post" enctype="multipart/form-data">
+                           <div class="form-group">
+			                   <label class="col-sm-4 control-label" style="float: left;">相册名称: </label>
+			                   <div class="col-sm-6">
+			                   	<input type="text" name="name" placeholder="请输入相册名称" class="form-control">
+			                   </div>
+			               </div>
+                           <div class="form-group">
+			                   <label class="col-sm-4 control-label" style="float: left;">封面图: </label>
+			                   <div class="col-sm-6">
+			                   	<input class="form-control" type="file" name="profile" id="profile" />
+			                   </div>
+			               </div>
+			               <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-5">
+                          <button type="submit" class="btn btn-primary" style="width: 100px" id="adSubmit">确定</button>
+                        </div>
+                    </div>
+                       </form>
+                   </div>
             </div>
         </div>
          <%@include file="/WEB-INF/views/back/foot.jsp"%>
