@@ -1,6 +1,9 @@
 package com.dcx.poz.util;
 
 public class ConstantUtil {
+	
+	public static final String SERVER_IP = "http://localhost:8080/proz";
+	
 	/**
 	 * 默认每页显示多少条记录
 	 */

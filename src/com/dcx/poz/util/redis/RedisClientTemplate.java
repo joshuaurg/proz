@@ -4,12 +4,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import com.dcx.poz.util.GlobalContext;
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisShardInfo;
@@ -23,8 +21,7 @@ public class RedisClientTemplate {
 	
 	private static final Logger log = LoggerFactory.getLogger(RedisClientTemplate.class);
 	
-	@Autowired
-	private RedisDataSource redisDataSource;
+	public RedisDataSource redisDataSource = (RedisDataSource) GlobalContext.getBean("redisDataSource");
 	
 	 public void disconnect() {
 		 ShardedJedis shardedJedis = redisDataSource.getRedisClient();

@@ -2,6 +2,7 @@ package com.dcx.poz.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**  
@@ -13,7 +14,7 @@ public class ErrorCodeProperties {
 
 	private ErrorCodeProperties() {
 		try {
-			properties.load(this.getClass().getClassLoader().getResourceAsStream("/errorCode.properties"));
+			properties.load(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("/errorCode.properties"), "UTF-8")); 
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
@@ -21,9 +22,7 @@ public class ErrorCodeProperties {
 
 			e.printStackTrace();
 		}
-
 	};
-
 	// 线程同步获得唯一实例
 	public static synchronized ErrorCodeProperties getInstance() {
 		if (null == env) {
@@ -32,14 +31,10 @@ public class ErrorCodeProperties {
 			return env;
 		}
 	}
-
 	public ErrorCodeProperties clone() {
 		return getInstance();
 	}
-
 	public String getProperties(String key) {
-
 		return properties.getProperty(key);
-
 	}
 }

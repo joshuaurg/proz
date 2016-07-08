@@ -2,26 +2,18 @@ package com.dcx.poz.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.json.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.dcx.poz.util.ConstantUtil;
 import com.dcx.poz.util.ErrorCodeUtil;
 import com.dcx.poz.util.JsonUtil;
-import com.dcx.poz.util.MediaUtil;
 import com.dcx.poz.util.QiniuUtil;
 
-/**
- * 
- * @author DiWu
- *
- */
-public class BaseController
-{
+public class BaseController{
 	
 	/**
 	 * 返回成功结果

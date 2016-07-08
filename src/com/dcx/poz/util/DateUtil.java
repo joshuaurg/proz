@@ -1,13 +1,9 @@
 package com.dcx.poz.util;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 
@@ -65,5 +61,23 @@ public class DateUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat(datePattern);
 		return sdf.format(parse(dateStr, datePattern));
 	}
-	
+
+	/**
+	 * 校验是否是时间戳
+	 * 1：必须是数字
+	 * 2：时间戳为13位
+	 * @param timestamp
+	 * @return
+	 */
+	public static boolean isTimeStamp(String timestamp) {
+		//时间戳一定是数字
+		if(!RegUitl.isDigital(timestamp)){
+			return false;
+		}
+		//时间戳为13位
+		if(!StringUtil.checkLength(timestamp,13,13)){
+			return false;
+		}
+		return true;
+	}
 }

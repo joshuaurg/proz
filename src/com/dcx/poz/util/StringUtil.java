@@ -40,5 +40,15 @@ public class StringUtil {
 		}
 		return true;
 	}
+
+	public static boolean checkLength(String target, int minLen, int maxLen) {
+		if(target==null){
+			return false;
+		}
+		if(target.length() < minLen || target.length() > maxLen){
+			 return false;
+		}
+		return true;
+	}
  
 }

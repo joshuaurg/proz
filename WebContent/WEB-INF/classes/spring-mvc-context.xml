@@ -17,6 +17,8 @@
         http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
 
+	<bean id="globalContext" class="com.dcx.poz.util.GlobalContext"></bean>
+
     <!-- 自动扫描dao和service包(自动注入) -->
 	<context:component-scan base-package="com.dcx.poz.service.*" />
 	<context:component-scan base-package="com.dcx.poz.dao.*" />
@@ -109,6 +111,8 @@
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
 	</aop:config>
+	
+	<bean id="redisClientTemplate" class="com.dcx.poz.util.redis.RedisClientTemplate"></bean>
 	
 	<import resource="redis-config.xml"/>
 </beans>
